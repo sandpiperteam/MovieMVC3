@@ -70,6 +70,16 @@
       <End Role="Film" EntitySet="Films" />
       <End Role="Genre" EntitySet="Genres" />
     </AssociationSet>
+    <EntitySet Name="BoxOffices" EntityType="MovieDBModel.BoxOffice" />
+    <AssociationSet Name="BoxOfficeFilm" Association="MovieDBModel.BoxOfficeFilm">
+      <End Role="BoxOffice" EntitySet="BoxOffices" />
+      <End Role="Film" EntitySet="Films" />
+    </AssociationSet>
+    <EntitySet Name="TechnicalDetails" EntityType="MovieDBModel.TechnicalDetails" />
+    <AssociationSet Name="TechnicalDetailsFilm" Association="MovieDBModel.TechnicalDetailsFilm">
+      <End Role="TechnicalDetails" EntitySet="TechnicalDetails" />
+      <End Role="Film" EntitySet="Films" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="CrewMember">
     <Key>
@@ -101,17 +111,7 @@
     <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
     <Property Name="Duration" Type="Int32" />
     <Property Name="Rating" Type="String" MaxLength="3" Unicode="false" FixedLength="false" />
-    <Property Name="Camera" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-    <Property Name="Laboratory" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-    <Property Name="FilmNegativeFormat" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-    <Property Name="CinematographicProcess" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-    <Property Name="PrintedFilmFormat" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-    <Property Name="AspectRatio" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
     <Property Name="ReleaseDate" Type="DateTime" />
-    <Property Name="FilmLength" Type="Int32" />
-    <Property Name="Budget" Type="Int32" />
-    <Property Name="OpeningWeekendGross" Type="Int32" />
-    <Property Name="TotalGross" Type="Int32" />
     <Property Name="Tagline" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
     <NavigationProperty Name="CrewMembers" Relationship="MovieDBModel.FK_CrewMember_Film" FromRole="Film" ToRole="CrewMember" />
     <NavigationProperty Name="PlotKeywords" Relationship="MovieDBModel.FK_PlotKeyword_Film" FromRole="Film" ToRole="PlotKeyword" />
@@ -120,6 +120,8 @@
     <NavigationProperty Name="Storylines" Relationship="MovieDBModel.FK_Storyline_Film" FromRole="Film" ToRole="Storyline" />
     <NavigationProperty Name="Trivias" Relationship="MovieDBModel.FK_Trivia_Film" FromRole="Film" ToRole="Trivia" />
     <NavigationProperty Name="Genres" Relationship="MovieDBModel.FilmGenre" FromRole="Film" ToRole="Genre" />
+    <NavigationProperty Name="BoxOffice" Relationship="MovieDBModel.BoxOfficeFilm" FromRole="Film" ToRole="BoxOffice" />
+    <NavigationProperty Name="TechnicalDetail" Relationship="MovieDBModel.TechnicalDetailsFilm" FromRole="Film" ToRole="TechnicalDetails" />
   </EntityType>
   <EntityType Name="FilmCharacter">
     <Key>
@@ -390,5 +392,53 @@
   <Association Name="FilmGenre">
     <End Role="Film" Type="MovieDBModel.Film" Multiplicity="*" />
     <End Role="Genre" Type="MovieDBModel.Genre" Multiplicity="*" />
+  </Association>
+  <EntityType Name="BoxOffice">
+    <Key>
+      <PropertyRef Name="FilmId" />
+    </Key>
+    <Property Type="Int32" Name="FilmId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="TotalGross" />
+    <Property Type="Int32" Name="OpeningWeekendGross" />
+    <Property Type="Int32" Name="Budget" />
+    <NavigationProperty Name="Film" Relationship="MovieDBModel.BoxOfficeFilm" FromRole="BoxOffice" ToRole="Film" />
+  </EntityType>
+  <Association Name="BoxOfficeFilm">
+    <End Type="MovieDBModel.BoxOffice" Role="BoxOffice" Multiplicity="1" />
+    <End Type="MovieDBModel.Film" Role="Film" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Film">
+        <PropertyRef Name="FilmId" />
+      </Principal>
+      <Dependent Role="BoxOffice">
+        <PropertyRef Name="FilmId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="TechnicalDetails">
+    <Key>
+      <PropertyRef Name="FilmId" />
+    </Key>
+    <Property Type="Int32" Name="FilmId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Camera" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Laboratory" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FilmNegativeFormat" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CinematographicProcess" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PrintedFilmFormat" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="AspectRatio" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="FilmLength" />
+    <NavigationProperty Name="Film" Relationship="MovieDBModel.TechnicalDetailsFilm" FromRole="TechnicalDetails" ToRole="Film" />
+  </EntityType>
+  <Association Name="TechnicalDetailsFilm">
+    <End Type="MovieDBModel.TechnicalDetails" Role="TechnicalDetails" Multiplicity="1" />
+    <End Type="MovieDBModel.Film" Role="Film" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Film">
+        <PropertyRef Name="FilmId" />
+      </Principal>
+      <Dependent Role="TechnicalDetails">
+        <PropertyRef Name="FilmId" />
+      </Dependent>
+    </ReferentialConstraint>
   </Association>
 </Schema>

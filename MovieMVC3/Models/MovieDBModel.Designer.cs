@@ -32,6 +32,8 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("MovieDBModel", "FK_Review_UserAccount", "UserAccount", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(MovieMVC3.Models.UserAccount), "Review", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MovieMVC3.Models.Review), true)]
 [assembly: EdmRelationshipAttribute("MovieDBModel", "FK_Trivia_UserAccount", "UserAccount", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(MovieMVC3.Models.UserAccount), "Trivia", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MovieMVC3.Models.Trivia), true)]
 [assembly: EdmRelationshipAttribute("MovieDBModel", "FilmGenre", "Film", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MovieMVC3.Models.Film), "Genre", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MovieMVC3.Models.Genre))]
+[assembly: EdmRelationshipAttribute("MovieDBModel", "BoxOfficeFilm", "BoxOffice", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(MovieMVC3.Models.BoxOffice), "Film", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(MovieMVC3.Models.Film), true)]
+[assembly: EdmRelationshipAttribute("MovieDBModel", "TechnicalDetailsFilm", "TechnicalDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(MovieMVC3.Models.TechnicalDetails), "Film", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(MovieMVC3.Models.Film), true)]
 
 #endregion
 
@@ -290,6 +292,38 @@ namespace MovieMVC3.Models
             }
         }
         private ObjectSet<UserAccount> _UserAccounts;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<BoxOffice> BoxOffices
+        {
+            get
+            {
+                if ((_BoxOffices == null))
+                {
+                    _BoxOffices = base.CreateObjectSet<BoxOffice>("BoxOffices");
+                }
+                return _BoxOffices;
+            }
+        }
+        private ObjectSet<BoxOffice> _BoxOffices;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<TechnicalDetails> TechnicalDetails
+        {
+            get
+            {
+                if ((_TechnicalDetails == null))
+                {
+                    _TechnicalDetails = base.CreateObjectSet<TechnicalDetails>("TechnicalDetails");
+                }
+                return _TechnicalDetails;
+            }
+        }
+        private ObjectSet<TechnicalDetails> _TechnicalDetails;
 
         #endregion
         #region AddTo Methods
@@ -397,6 +431,22 @@ namespace MovieMVC3.Models
         {
             base.AddObject("UserAccounts", userAccount);
         }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the BoxOffices EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToBoxOffices(BoxOffice boxOffice)
+        {
+            base.AddObject("BoxOffices", boxOffice);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the TechnicalDetails EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToTechnicalDetails(TechnicalDetails technicalDetails)
+        {
+            base.AddObject("TechnicalDetails", technicalDetails);
+        }
 
         #endregion
     }
@@ -405,6 +455,174 @@ namespace MovieMVC3.Models
     #endregion
     
     #region Entities
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="MovieDBModel", Name="BoxOffice")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class BoxOffice : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new BoxOffice object.
+        /// </summary>
+        /// <param name="filmId">Initial value of the FilmId property.</param>
+        public static BoxOffice CreateBoxOffice(global::System.Int32 filmId)
+        {
+            BoxOffice boxOffice = new BoxOffice();
+            boxOffice.FilmId = filmId;
+            return boxOffice;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 FilmId
+        {
+            get
+            {
+                return _FilmId;
+            }
+            set
+            {
+                if (_FilmId != value)
+                {
+                    OnFilmIdChanging(value);
+                    ReportPropertyChanging("FilmId");
+                    _FilmId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("FilmId");
+                    OnFilmIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _FilmId;
+        partial void OnFilmIdChanging(global::System.Int32 value);
+        partial void OnFilmIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> TotalGross
+        {
+            get
+            {
+                return _TotalGross;
+            }
+            set
+            {
+                OnTotalGrossChanging(value);
+                ReportPropertyChanging("TotalGross");
+                _TotalGross = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("TotalGross");
+                OnTotalGrossChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _TotalGross;
+        partial void OnTotalGrossChanging(Nullable<global::System.Int32> value);
+        partial void OnTotalGrossChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> OpeningWeekendGross
+        {
+            get
+            {
+                return _OpeningWeekendGross;
+            }
+            set
+            {
+                OnOpeningWeekendGrossChanging(value);
+                ReportPropertyChanging("OpeningWeekendGross");
+                _OpeningWeekendGross = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("OpeningWeekendGross");
+                OnOpeningWeekendGrossChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _OpeningWeekendGross;
+        partial void OnOpeningWeekendGrossChanging(Nullable<global::System.Int32> value);
+        partial void OnOpeningWeekendGrossChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> Budget
+        {
+            get
+            {
+                return _Budget;
+            }
+            set
+            {
+                OnBudgetChanging(value);
+                ReportPropertyChanging("Budget");
+                _Budget = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Budget");
+                OnBudgetChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _Budget;
+        partial void OnBudgetChanging(Nullable<global::System.Int32> value);
+        partial void OnBudgetChanged();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("MovieDBModel", "BoxOfficeFilm", "Film")]
+        public Film Film
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Film>("MovieDBModel.BoxOfficeFilm", "Film").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Film>("MovieDBModel.BoxOfficeFilm", "Film").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Film> FilmReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Film>("MovieDBModel.BoxOfficeFilm", "Film");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Film>("MovieDBModel.BoxOfficeFilm", "Film", value);
+                }
+            }
+        }
+
+        #endregion
+    }
     
     /// <summary>
     /// No Metadata Documentation available.
@@ -938,150 +1156,6 @@ namespace MovieMVC3.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String Camera
-        {
-            get
-            {
-                return _Camera;
-            }
-            set
-            {
-                OnCameraChanging(value);
-                ReportPropertyChanging("Camera");
-                _Camera = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Camera");
-                OnCameraChanged();
-            }
-        }
-        private global::System.String _Camera;
-        partial void OnCameraChanging(global::System.String value);
-        partial void OnCameraChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String Laboratory
-        {
-            get
-            {
-                return _Laboratory;
-            }
-            set
-            {
-                OnLaboratoryChanging(value);
-                ReportPropertyChanging("Laboratory");
-                _Laboratory = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Laboratory");
-                OnLaboratoryChanged();
-            }
-        }
-        private global::System.String _Laboratory;
-        partial void OnLaboratoryChanging(global::System.String value);
-        partial void OnLaboratoryChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String FilmNegativeFormat
-        {
-            get
-            {
-                return _FilmNegativeFormat;
-            }
-            set
-            {
-                OnFilmNegativeFormatChanging(value);
-                ReportPropertyChanging("FilmNegativeFormat");
-                _FilmNegativeFormat = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("FilmNegativeFormat");
-                OnFilmNegativeFormatChanged();
-            }
-        }
-        private global::System.String _FilmNegativeFormat;
-        partial void OnFilmNegativeFormatChanging(global::System.String value);
-        partial void OnFilmNegativeFormatChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String CinematographicProcess
-        {
-            get
-            {
-                return _CinematographicProcess;
-            }
-            set
-            {
-                OnCinematographicProcessChanging(value);
-                ReportPropertyChanging("CinematographicProcess");
-                _CinematographicProcess = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("CinematographicProcess");
-                OnCinematographicProcessChanged();
-            }
-        }
-        private global::System.String _CinematographicProcess;
-        partial void OnCinematographicProcessChanging(global::System.String value);
-        partial void OnCinematographicProcessChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String PrintedFilmFormat
-        {
-            get
-            {
-                return _PrintedFilmFormat;
-            }
-            set
-            {
-                OnPrintedFilmFormatChanging(value);
-                ReportPropertyChanging("PrintedFilmFormat");
-                _PrintedFilmFormat = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("PrintedFilmFormat");
-                OnPrintedFilmFormatChanged();
-            }
-        }
-        private global::System.String _PrintedFilmFormat;
-        partial void OnPrintedFilmFormatChanging(global::System.String value);
-        partial void OnPrintedFilmFormatChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String AspectRatio
-        {
-            get
-            {
-                return _AspectRatio;
-            }
-            set
-            {
-                OnAspectRatioChanging(value);
-                ReportPropertyChanging("AspectRatio");
-                _AspectRatio = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("AspectRatio");
-                OnAspectRatioChanged();
-            }
-        }
-        private global::System.String _AspectRatio;
-        partial void OnAspectRatioChanging(global::System.String value);
-        partial void OnAspectRatioChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
         public Nullable<global::System.DateTime> ReleaseDate
         {
             get
@@ -1100,102 +1174,6 @@ namespace MovieMVC3.Models
         private Nullable<global::System.DateTime> _ReleaseDate;
         partial void OnReleaseDateChanging(Nullable<global::System.DateTime> value);
         partial void OnReleaseDateChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Int32> FilmLength
-        {
-            get
-            {
-                return _FilmLength;
-            }
-            set
-            {
-                OnFilmLengthChanging(value);
-                ReportPropertyChanging("FilmLength");
-                _FilmLength = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("FilmLength");
-                OnFilmLengthChanged();
-            }
-        }
-        private Nullable<global::System.Int32> _FilmLength;
-        partial void OnFilmLengthChanging(Nullable<global::System.Int32> value);
-        partial void OnFilmLengthChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Int32> Budget
-        {
-            get
-            {
-                return _Budget;
-            }
-            set
-            {
-                OnBudgetChanging(value);
-                ReportPropertyChanging("Budget");
-                _Budget = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Budget");
-                OnBudgetChanged();
-            }
-        }
-        private Nullable<global::System.Int32> _Budget;
-        partial void OnBudgetChanging(Nullable<global::System.Int32> value);
-        partial void OnBudgetChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Int32> OpeningWeekendGross
-        {
-            get
-            {
-                return _OpeningWeekendGross;
-            }
-            set
-            {
-                OnOpeningWeekendGrossChanging(value);
-                ReportPropertyChanging("OpeningWeekendGross");
-                _OpeningWeekendGross = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("OpeningWeekendGross");
-                OnOpeningWeekendGrossChanged();
-            }
-        }
-        private Nullable<global::System.Int32> _OpeningWeekendGross;
-        partial void OnOpeningWeekendGrossChanging(Nullable<global::System.Int32> value);
-        partial void OnOpeningWeekendGrossChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Int32> TotalGross
-        {
-            get
-            {
-                return _TotalGross;
-            }
-            set
-            {
-                OnTotalGrossChanging(value);
-                ReportPropertyChanging("TotalGross");
-                _TotalGross = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("TotalGross");
-                OnTotalGrossChanged();
-            }
-        }
-        private Nullable<global::System.Int32> _TotalGross;
-        partial void OnTotalGrossChanging(Nullable<global::System.Int32> value);
-        partial void OnTotalGrossChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1375,6 +1353,82 @@ namespace MovieMVC3.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Genre>("MovieDBModel.FilmGenre", "Genre", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("MovieDBModel", "BoxOfficeFilm", "BoxOffice")]
+        public BoxOffice BoxOffice
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<BoxOffice>("MovieDBModel.BoxOfficeFilm", "BoxOffice").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<BoxOffice>("MovieDBModel.BoxOfficeFilm", "BoxOffice").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<BoxOffice> BoxOfficeReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<BoxOffice>("MovieDBModel.BoxOfficeFilm", "BoxOffice");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<BoxOffice>("MovieDBModel.BoxOfficeFilm", "BoxOffice", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("MovieDBModel", "TechnicalDetailsFilm", "TechnicalDetails")]
+        public TechnicalDetails TechnicalDetail
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TechnicalDetails>("MovieDBModel.TechnicalDetailsFilm", "TechnicalDetails").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TechnicalDetails>("MovieDBModel.TechnicalDetailsFilm", "TechnicalDetails").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<TechnicalDetails> TechnicalDetailReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TechnicalDetails>("MovieDBModel.TechnicalDetailsFilm", "TechnicalDetails");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<TechnicalDetails>("MovieDBModel.TechnicalDetailsFilm", "TechnicalDetails", value);
                 }
             }
         }
@@ -2831,6 +2885,270 @@ namespace MovieMVC3.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Film>("MovieDBModel.FK_Storyline_Film", "Film", value);
+                }
+            }
+        }
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="MovieDBModel", Name="TechnicalDetails")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class TechnicalDetails : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new TechnicalDetails object.
+        /// </summary>
+        /// <param name="filmId">Initial value of the FilmId property.</param>
+        public static TechnicalDetails CreateTechnicalDetails(global::System.Int32 filmId)
+        {
+            TechnicalDetails technicalDetails = new TechnicalDetails();
+            technicalDetails.FilmId = filmId;
+            return technicalDetails;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 FilmId
+        {
+            get
+            {
+                return _FilmId;
+            }
+            set
+            {
+                if (_FilmId != value)
+                {
+                    OnFilmIdChanging(value);
+                    ReportPropertyChanging("FilmId");
+                    _FilmId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("FilmId");
+                    OnFilmIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _FilmId;
+        partial void OnFilmIdChanging(global::System.Int32 value);
+        partial void OnFilmIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Camera
+        {
+            get
+            {
+                return _Camera;
+            }
+            set
+            {
+                OnCameraChanging(value);
+                ReportPropertyChanging("Camera");
+                _Camera = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Camera");
+                OnCameraChanged();
+            }
+        }
+        private global::System.String _Camera;
+        partial void OnCameraChanging(global::System.String value);
+        partial void OnCameraChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Laboratory
+        {
+            get
+            {
+                return _Laboratory;
+            }
+            set
+            {
+                OnLaboratoryChanging(value);
+                ReportPropertyChanging("Laboratory");
+                _Laboratory = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Laboratory");
+                OnLaboratoryChanged();
+            }
+        }
+        private global::System.String _Laboratory;
+        partial void OnLaboratoryChanging(global::System.String value);
+        partial void OnLaboratoryChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String FilmNegativeFormat
+        {
+            get
+            {
+                return _FilmNegativeFormat;
+            }
+            set
+            {
+                OnFilmNegativeFormatChanging(value);
+                ReportPropertyChanging("FilmNegativeFormat");
+                _FilmNegativeFormat = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("FilmNegativeFormat");
+                OnFilmNegativeFormatChanged();
+            }
+        }
+        private global::System.String _FilmNegativeFormat;
+        partial void OnFilmNegativeFormatChanging(global::System.String value);
+        partial void OnFilmNegativeFormatChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String CinematographicProcess
+        {
+            get
+            {
+                return _CinematographicProcess;
+            }
+            set
+            {
+                OnCinematographicProcessChanging(value);
+                ReportPropertyChanging("CinematographicProcess");
+                _CinematographicProcess = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("CinematographicProcess");
+                OnCinematographicProcessChanged();
+            }
+        }
+        private global::System.String _CinematographicProcess;
+        partial void OnCinematographicProcessChanging(global::System.String value);
+        partial void OnCinematographicProcessChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String PrintedFilmFormat
+        {
+            get
+            {
+                return _PrintedFilmFormat;
+            }
+            set
+            {
+                OnPrintedFilmFormatChanging(value);
+                ReportPropertyChanging("PrintedFilmFormat");
+                _PrintedFilmFormat = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("PrintedFilmFormat");
+                OnPrintedFilmFormatChanged();
+            }
+        }
+        private global::System.String _PrintedFilmFormat;
+        partial void OnPrintedFilmFormatChanging(global::System.String value);
+        partial void OnPrintedFilmFormatChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String AspectRatio
+        {
+            get
+            {
+                return _AspectRatio;
+            }
+            set
+            {
+                OnAspectRatioChanging(value);
+                ReportPropertyChanging("AspectRatio");
+                _AspectRatio = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("AspectRatio");
+                OnAspectRatioChanged();
+            }
+        }
+        private global::System.String _AspectRatio;
+        partial void OnAspectRatioChanging(global::System.String value);
+        partial void OnAspectRatioChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> FilmLength
+        {
+            get
+            {
+                return _FilmLength;
+            }
+            set
+            {
+                OnFilmLengthChanging(value);
+                ReportPropertyChanging("FilmLength");
+                _FilmLength = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("FilmLength");
+                OnFilmLengthChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _FilmLength;
+        partial void OnFilmLengthChanging(Nullable<global::System.Int32> value);
+        partial void OnFilmLengthChanged();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("MovieDBModel", "TechnicalDetailsFilm", "Film")]
+        public Film Film
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Film>("MovieDBModel.TechnicalDetailsFilm", "Film").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Film>("MovieDBModel.TechnicalDetailsFilm", "Film").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Film> FilmReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Film>("MovieDBModel.TechnicalDetailsFilm", "Film");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Film>("MovieDBModel.TechnicalDetailsFilm", "Film", value);
                 }
             }
         }

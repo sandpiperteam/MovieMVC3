@@ -476,6 +476,16 @@
             <End Role="Film" EntitySet="Films" />
             <End Role="Genre" EntitySet="Genres" />
           </AssociationSet>
+          <EntitySet Name="BoxOffices" EntityType="MovieDBModel.BoxOffice" />
+          <AssociationSet Name="BoxOfficeFilm" Association="MovieDBModel.BoxOfficeFilm">
+            <End Role="BoxOffice" EntitySet="BoxOffices" />
+            <End Role="Film" EntitySet="Films" />
+          </AssociationSet>
+          <EntitySet Name="TechnicalDetails" EntityType="MovieDBModel.TechnicalDetails" />
+          <AssociationSet Name="TechnicalDetailsFilm" Association="MovieDBModel.TechnicalDetailsFilm">
+            <End Role="TechnicalDetails" EntitySet="TechnicalDetails" />
+            <End Role="Film" EntitySet="Films" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="CrewMember">
           <Key>
@@ -507,17 +517,7 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="Duration" Type="Int32" />
           <Property Name="Rating" Type="String" MaxLength="3" Unicode="false" FixedLength="false" />
-          <Property Name="Camera" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="Laboratory" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="FilmNegativeFormat" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="CinematographicProcess" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="PrintedFilmFormat" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="AspectRatio" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="ReleaseDate" Type="DateTime" />
-          <Property Name="FilmLength" Type="Int32" />
-          <Property Name="Budget" Type="Int32" />
-          <Property Name="OpeningWeekendGross" Type="Int32" />
-          <Property Name="TotalGross" Type="Int32" />
           <Property Name="Tagline" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="CrewMembers" Relationship="MovieDBModel.FK_CrewMember_Film" FromRole="Film" ToRole="CrewMember" />
           <NavigationProperty Name="PlotKeywords" Relationship="MovieDBModel.FK_PlotKeyword_Film" FromRole="Film" ToRole="PlotKeyword" />
@@ -526,6 +526,8 @@
           <NavigationProperty Name="Storylines" Relationship="MovieDBModel.FK_Storyline_Film" FromRole="Film" ToRole="Storyline" />
           <NavigationProperty Name="Trivias" Relationship="MovieDBModel.FK_Trivia_Film" FromRole="Film" ToRole="Trivia" />
           <NavigationProperty Name="Genres" Relationship="MovieDBModel.FilmGenre" FromRole="Film" ToRole="Genre" />
+          <NavigationProperty Name="BoxOffice" Relationship="MovieDBModel.BoxOfficeFilm" FromRole="Film" ToRole="BoxOffice" />
+          <NavigationProperty Name="TechnicalDetail" Relationship="MovieDBModel.TechnicalDetailsFilm" FromRole="Film" ToRole="TechnicalDetails" />
         </EntityType>
         <EntityType Name="FilmCharacter">
           <Key>
@@ -797,6 +799,54 @@
           <End Role="Film" Type="MovieDBModel.Film" Multiplicity="*" />
           <End Role="Genre" Type="MovieDBModel.Genre" Multiplicity="*" />
         </Association>
+        <EntityType Name="BoxOffice">
+          <Key>
+            <PropertyRef Name="FilmId" />
+          </Key>
+          <Property Type="Int32" Name="FilmId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="TotalGross" />
+          <Property Type="Int32" Name="OpeningWeekendGross" />
+          <Property Type="Int32" Name="Budget" />
+          <NavigationProperty Name="Film" Relationship="MovieDBModel.BoxOfficeFilm" FromRole="BoxOffice" ToRole="Film" />
+        </EntityType>
+        <Association Name="BoxOfficeFilm">
+          <End Type="MovieDBModel.BoxOffice" Role="BoxOffice" Multiplicity="1" />
+          <End Type="MovieDBModel.Film" Role="Film" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Film">
+              <PropertyRef Name="FilmId" />
+            </Principal>
+            <Dependent Role="BoxOffice">
+              <PropertyRef Name="FilmId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TechnicalDetails">
+          <Key>
+            <PropertyRef Name="FilmId" />
+          </Key>
+          <Property Type="Int32" Name="FilmId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Camera" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Laboratory" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="FilmNegativeFormat" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CinematographicProcess" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="PrintedFilmFormat" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="AspectRatio" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="FilmLength" />
+          <NavigationProperty Name="Film" Relationship="MovieDBModel.TechnicalDetailsFilm" FromRole="TechnicalDetails" ToRole="Film" />
+        </EntityType>
+        <Association Name="TechnicalDetailsFilm">
+          <End Type="MovieDBModel.TechnicalDetails" Role="TechnicalDetails" Multiplicity="1" />
+          <End Type="MovieDBModel.Film" Role="Film" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Film">
+              <PropertyRef Name="FilmId" />
+            </Principal>
+            <Dependent Role="TechnicalDetails">
+              <PropertyRef Name="FilmId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -819,17 +869,7 @@
             <ScalarProperty Name="Name" ColumnName="Name" />
             <ScalarProperty Name="Duration" ColumnName="Duration" />
             <ScalarProperty Name="Rating" ColumnName="Rating" />
-            <ScalarProperty Name="Camera" ColumnName="Camera" />
-            <ScalarProperty Name="Laboratory" ColumnName="Laboratory" />
-            <ScalarProperty Name="FilmNegativeFormat" ColumnName="FilmNegativeFormat" />
-            <ScalarProperty Name="CinematographicProcess" ColumnName="CinematographicProcess" />
-            <ScalarProperty Name="PrintedFilmFormat" ColumnName="PrintedFilmFormat" />
-            <ScalarProperty Name="AspectRatio" ColumnName="AspectRatio" />
             <ScalarProperty Name="ReleaseDate" ColumnName="ReleaseDate" />
-            <ScalarProperty Name="FilmLength" ColumnName="FilmLength" />
-            <ScalarProperty Name="Budget" ColumnName="Budget" />
-            <ScalarProperty Name="OpeningWeekendGross" ColumnName="OpeningWeekendGross" />
-            <ScalarProperty Name="TotalGross" ColumnName="TotalGross" />
             <ScalarProperty Name="Tagline" ColumnName="Tagline" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="FilmCharacters"><EntityTypeMapping TypeName="MovieDBModel.FilmCharacter"><MappingFragment StoreEntitySet="FilmCharacter">
@@ -904,6 +944,30 @@
               <ScalarProperty Name="GenreId" ColumnName="GenreId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="BoxOffices">
+            <EntityTypeMapping TypeName="IsTypeOf(MovieDBModel.BoxOffice)">
+              <MappingFragment StoreEntitySet="Film">
+                <ScalarProperty Name="TotalGross" ColumnName="TotalGross" />
+                <ScalarProperty Name="OpeningWeekendGross" ColumnName="OpeningWeekendGross" />
+                <ScalarProperty Name="Budget" ColumnName="Budget" />
+                <ScalarProperty Name="FilmId" ColumnName="FilmId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TechnicalDetails">
+            <EntityTypeMapping TypeName="IsTypeOf(MovieDBModel.TechnicalDetails)">
+              <MappingFragment StoreEntitySet="Film">
+                <ScalarProperty Name="FilmLength" ColumnName="FilmLength" />
+                <ScalarProperty Name="AspectRatio" ColumnName="AspectRatio" />
+                <ScalarProperty Name="PrintedFilmFormat" ColumnName="PrintedFilmFormat" />
+                <ScalarProperty Name="CinematographicProcess" ColumnName="CinematographicProcess" />
+                <ScalarProperty Name="FilmNegativeFormat" ColumnName="FilmNegativeFormat" />
+                <ScalarProperty Name="Laboratory" ColumnName="Laboratory" />
+                <ScalarProperty Name="Camera" ColumnName="Camera" />
+                <ScalarProperty Name="FilmId" ColumnName="FilmId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -925,126 +989,86 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="MovieDBModel">
-        <EntityTypeShape EntityType="MovieDBModel.CrewMember" Width="1.5" PointX="3" PointY="9.75" Height="2.7494921874999996" IsExpanded="true" />
-        <EntityTypeShape EntityType="MovieDBModel.CrewRole" Width="1.5" PointX="0.75" PointY="2.875" Height="1.5956835937499996" IsExpanded="true" />
-        <EntityTypeShape EntityType="MovieDBModel.Film" Width="1.5" PointX="0.75" PointY="9.375" Height="5.4417122395833317" IsExpanded="true" />
-        <EntityTypeShape EntityType="MovieDBModel.FilmCharacter" Width="1.5" PointX="5.25" PointY="5.25" Height="1.7879850260416657" IsExpanded="true" />
-        <EntityTypeShape EntityType="MovieDBModel.Genre" Width="1.5" PointX="3" PointY="13.375" Height="1.5956835937499996" IsExpanded="true" />
-        <EntityTypeShape EntityType="MovieDBModel.KeywordList" Width="1.5" PointX="3.75" PointY="16.25" Height="1.5956835937500031" IsExpanded="true" />
-        <EntityTypeShape EntityType="MovieDBModel.Person" Width="1.5" PointX="0.75" PointY="16.125" Height="2.172587890624996" IsExpanded="true" />
-        <EntityTypeShape EntityType="MovieDBModel.PlotKeyword" Width="1.5" PointX="6" PointY="11.125" Height="1.9802864583333317" IsExpanded="true" />
-        <EntityTypeShape EntityType="MovieDBModel.Quote" Width="1.5" PointX="6" PointY="7.875" Height="2.3648893229166674" IsExpanded="true" />
-        <EntityTypeShape EntityType="MovieDBModel.Review" Width="1.5" PointX="6" PointY="14.75" Height="2.7494921875000014" IsExpanded="true" />
-        <EntityTypeShape EntityType="MovieDBModel.Storyline" Width="1.5" PointX="3.25" PointY="18.375" Height="2.1725878906250031" IsExpanded="true" />
-        <EntityTypeShape EntityType="MovieDBModel.Trivia" Width="1.5" PointX="3" PointY="5.875" Height="2.3648893229166674" IsExpanded="true" />
-        <EntityTypeShape EntityType="MovieDBModel.UserAccount" Width="1.5" PointX="0.75" PointY="5.625" Height="2.9417936197916674" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieDBModel.CrewMember" Width="1.5" PointX="6.625" PointY="6.625" Height="2.7494921874999996" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieDBModel.CrewRole" Width="1.5" PointX="4.125" PointY="6.375" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieDBModel.Film" Width="1.5" PointX="9" PointY="9" Height="3.7109993489583335" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieDBModel.FilmCharacter" Width="1.5" PointX="6.625" PointY="4.125" Height="1.7879850260416657" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieDBModel.Genre" Width="1.875" PointX="11.5" PointY="8" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieDBModel.KeywordList" Width="1.5" PointX="4.125" PointY="11.25" Height="1.5956835937500031" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieDBModel.Person" Width="1.5" PointX="4.125" PointY="8.5" Height="2.172587890624996" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieDBModel.PlotKeyword" Width="1.5" PointX="6.625" PointY="9.875" Height="1.9802864583333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieDBModel.Quote" Width="1.5" PointX="6.625" PointY="12.25" Height="2.3648893229166674" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieDBModel.Review" Width="1.5" PointX="11.5" PointY="15.5" Height="2.7494921875000014" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieDBModel.Storyline" Width="1.5" PointX="9" PointY="6.125" Height="2.1725878906250031" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieDBModel.Trivia" Width="1.5" PointX="9" PointY="13.625" Height="2.3648893229166674" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieDBModel.UserAccount" Width="1.5" PointX="6.625" PointY="15.375" Height="2.9417936197916674" IsExpanded="true" />
         <AssociationConnector Association="MovieDBModel.FK_CrewMember_CrewRole" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="4.47068359375" />
-          <ConnectorPoint PointX="2.625" PointY="4.84568359375" />
-          <ConnectorPoint PointX="2.625" PointY="11.12474609375" />
-          <ConnectorPoint PointX="3" PointY="11.12474609375" />
+          <ConnectorPoint PointX="5.625" PointY="7.297841796875" />
+          <ConnectorPoint PointX="6.625" PointY="7.297841796875" />
         </AssociationConnector>
         <AssociationConnector Association="MovieDBModel.FK_CrewMember_Film" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="10.374873046874999" />
-          <ConnectorPoint PointX="2.5416666666666665" PointY="10.374873046874999" />
-          <ConnectorPoint PointX="2.7083333333333335" PointY="10.374873046874999" />
-          <ConnectorPoint PointX="3" PointY="10.374873046874999" />
+          <ConnectorPoint PointX="9" PointY="9.18724609375" />
+          <ConnectorPoint PointX="8.125" PointY="9.18724609375" />
         </AssociationConnector>
         <AssociationConnector Association="MovieDBModel.FK_CrewMember_Person" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="16.188460538461534" />
-          <ConnectorPoint PointX="2.6875" PointY="15.750960538461534" />
-          <ConnectorPoint PointX="2.6875" PointY="11.843371140624999" />
-          <ConnectorPoint PointX="3" PointY="11.843371140624999" />
+          <ConnectorPoint PointX="5.625" PointY="8.93724609375" />
+          <ConnectorPoint PointX="6.625" PointY="8.93724609375" />
         </AssociationConnector>
         <AssociationConnector Association="MovieDBModel.FK_FilmCharacter_CrewMember" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="10.682444661458334" />
-          <ConnectorPoint PointX="5.59375" PointY="10.682444661458334" />
-          <ConnectorPoint PointX="5.59375" PointY="7.0379850260416656" />
+          <ConnectorPoint PointX="7.375" PointY="6.625" />
+          <ConnectorPoint PointX="7.375" PointY="5.9129850260416656" />
         </AssociationConnector>
         <AssociationConnector Association="MovieDBModel.FK_PlotKeyword_Film" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="12.833639322916666" />
-          <ConnectorPoint PointX="2.6041666666666665" PointY="12.833639322916666" />
-          <ConnectorPoint PointX="2.7708333333333335" PointY="12.833639322916666" />
-          <ConnectorPoint PointX="5.666666666666667" PointY="12.833639322916666" />
-          <ConnectorPoint PointX="5.833333333333333" PointY="12.833639322916666" />
-          <ConnectorPoint PointX="6" PointY="12.833639322916666" />
+          <ConnectorPoint PointX="9" PointY="10.865143229166666" />
+          <ConnectorPoint PointX="8.125" PointY="10.865143229166666" />
         </AssociationConnector>
         <AssociationConnector Association="MovieDBModel.FK_Quotes_Film" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="9.53125" />
-          <ConnectorPoint PointX="2.5416666666666665" PointY="9.53125" />
-          <ConnectorPoint PointX="2.7083333333333335" PointY="9.53125" />
-          <ConnectorPoint PointX="5.510416666666667" PointY="9.5312499999999982" />
-          <ConnectorPoint PointX="5.833333333333333" PointY="9.53125" />
-          <ConnectorPoint PointX="6" PointY="9.53125" />
+          <ConnectorPoint PointX="9" PointY="12.576650390625" />
+          <ConnectorPoint PointX="8.125" PointY="12.576650390625" />
         </AssociationConnector>
         <AssociationConnector Association="MovieDBModel.FK_Review_Film" ManuallyRouted="false">
-          <ConnectorPoint PointX="1.5" PointY="14.816712239583332" />
-          <ConnectorPoint PointX="1.5" PointY="15.875" />
-          <ConnectorPoint PointX="2.4801272051282006" PointY="15.875" />
-          <ConnectorPoint PointX="2.6467938717948676" PointY="15.875" />
-          <ConnectorPoint PointX="2.7916666666666665" PointY="15.875" />
-          <ConnectorPoint PointX="2.9583333333333335" PointY="15.875" />
-          <ConnectorPoint PointX="4.822916666666667" PointY="15.875" />
-          <ConnectorPoint PointX="4.989583333333333" PointY="15.875" />
-          <ConnectorPoint PointX="5.625" PointY="15.875" />
-          <ConnectorPoint PointX="5.625" PointY="16.12474609375" />
-          <ConnectorPoint PointX="6" PointY="16.12474609375" />
+          <ConnectorPoint PointX="10.5" PointY="12.90330078125" />
+          <ConnectorPoint PointX="10.875" PointY="13.740732421875002" />
+          <ConnectorPoint PointX="10.875" PointY="16.5310575703125" />
+          <ConnectorPoint PointX="11.5" PointY="16.5310575703125" />
         </AssociationConnector>
         <AssociationConnector Association="MovieDBModel.FK_Storyline_Film" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.2499999999999996" PointY="14.816712239583332" />
-          <ConnectorPoint PointX="2.6285744349011213" PointY="15.195286674484452" />
-          <ConnectorPoint PointX="2.7464255650988791" PointY="15.31313780468221" />
-          <ConnectorPoint PointX="2.875" PointY="15.441712239583332" />
-          <ConnectorPoint PointX="2.875" PointY="19.4612939453125" />
-          <ConnectorPoint PointX="3.25" PointY="19.4612939453125" />
+          <ConnectorPoint PointX="9.75" PointY="9" />
+          <ConnectorPoint PointX="9.75" PointY="8.2975878906250031" />
         </AssociationConnector>
         <AssociationConnector Association="MovieDBModel.FK_Trivia_Film" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="9.43846053846154" />
-          <ConnectorPoint PointX="2.5660744349011204" PointY="9.1223861035604177" />
-          <ConnectorPoint PointX="2.6839255650988791" PointY="9.0045349733626612" />
-          <ConnectorPoint PointX="2.8125" PointY="8.87596053846154" />
-          <ConnectorPoint PointX="2.8125" PointY="7.0574446614583337" />
-          <ConnectorPoint PointX="3" PointY="7.0574446614583337" />
+          <ConnectorPoint PointX="9.7187475" PointY="12.90330078125" />
+          <ConnectorPoint PointX="9.7187475" PointY="13.625" />
         </AssociationConnector>
         <AssociationConnector Association="MovieDBModel.FK_PlotKeyword_Keywords" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.90625" PointY="16.25" />
-          <ConnectorPoint PointX="4.90625" PointY="13.000715390625" />
-          <ConnectorPoint PointX="5.666666666666667" PointY="13.000715390625" />
-          <ConnectorPoint PointX="5.833333333333333" PointY="13.000715390625" />
-          <ConnectorPoint PointX="6" PointY="13.000715390625" />
+          <ConnectorPoint PointX="5.625" PointY="11.552643229166666" />
+          <ConnectorPoint PointX="6.625" PointY="11.552643229166666" />
         </AssociationConnector>
         <AssociationConnector Association="MovieDBModel.FK_Quotes_UserAccount" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="8.4345914713541674" />
-          <ConnectorPoint PointX="2.5416666666666665" PointY="8.4345914713541674" />
-          <ConnectorPoint PointX="2.7083333333333335" PointY="8.4345914713541674" />
-          <ConnectorPoint PointX="2.7291666666666665" PointY="8.4345914713541674" />
-          <ConnectorPoint PointX="2.8958333333333335" PointY="8.4345914713541674" />
-          <ConnectorPoint PointX="5.510416666666667" PointY="8.4345914713541674" />
-          <ConnectorPoint PointX="5.677083333333333" PointY="8.4345914713541674" />
-          <ConnectorPoint PointX="6" PointY="8.4345914713541674" />
+          <ConnectorPoint PointX="7.375" PointY="15.375" />
+          <ConnectorPoint PointX="7.375" PointY="14.614889322916667" />
         </AssociationConnector>
         <AssociationConnector Association="MovieDBModel.FK_Review_UserAccount" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.2499999999999996" PointY="8.5667936197916674" />
-          <ConnectorPoint PointX="2.625" PointY="8.9417936197916674" />
-          <ConnectorPoint PointX="2.6633335853365385" PointY="8.9417936197916674" />
-          <ConnectorPoint PointX="2.8300002520032055" PointY="8.9417936197916674" />
-          <ConnectorPoint PointX="5.510416666666667" PointY="8.9417936197916674" />
-          <ConnectorPoint PointX="5.677083333333333" PointY="8.9417936197916674" />
-          <ConnectorPoint PointX="5.75" PointY="8.9417936197916674" />
-          <ConnectorPoint PointX="5.75" PointY="14.498847153846153" />
-          <ConnectorPoint PointX="6.0011528461538459" PointY="14.75" />
+          <ConnectorPoint PointX="8.125" PointY="17.452774878906251" />
+          <ConnectorPoint PointX="11.5" PointY="17.452774878906251" />
         </AssociationConnector>
         <AssociationConnector Association="MovieDBModel.FK_Trivia_UserAccount" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="6.4037223307291669" />
-          <ConnectorPoint PointX="2.5416666666666665" PointY="6.403722330729166" />
-          <ConnectorPoint PointX="2.7083333333333335" PointY="6.4037223307291669" />
-          <ConnectorPoint PointX="3" PointY="6.4037223307291669" />
+          <ConnectorPoint PointX="8.125" PointY="15.682444661458334" />
+          <ConnectorPoint PointX="9" PointY="15.682444661458334" />
         </AssociationConnector>
         <AssociationConnector Association="MovieDBModel.FilmGenre" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="14.064603619791665" />
-          <ConnectorPoint PointX="2.6041666666666665" PointY="14.064603619791665" />
-          <ConnectorPoint PointX="2.7708333333333335" PointY="14.064603619791665" />
-          <ConnectorPoint PointX="3" PointY="14.064603619791665" />
+          <ConnectorPoint PointX="10.5" PointY="9.297841796875" />
+          <ConnectorPoint PointX="11.5" PointY="9.297841796875" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="MovieDBModel.BoxOffice" Width="1.875" PointX="11.5" PointY="9.875" Height="1.9802864583333317" />
+        <AssociationConnector Association="MovieDBModel.BoxOfficeFilm">
+          <ConnectorPoint PointX="11.5" PointY="10.865143229166666" />
+          <ConnectorPoint PointX="10.5" PointY="10.865143229166666" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="MovieDBModel.TechnicalDetails" Width="1.875" PointX="11.5" PointY="12.125" Height="2.7494921874999996" />
+        <AssociationConnector Association="MovieDBModel.TechnicalDetailsFilm">
+          <ConnectorPoint PointX="11.5" PointY="12.482897890624999" />
+          <ConnectorPoint PointX="10.5" PointY="12.482897890624999" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

@@ -27,17 +27,7 @@
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Duration" ColumnName="Duration" />
           <ScalarProperty Name="Rating" ColumnName="Rating" />
-          <ScalarProperty Name="Camera" ColumnName="Camera" />
-          <ScalarProperty Name="Laboratory" ColumnName="Laboratory" />
-          <ScalarProperty Name="FilmNegativeFormat" ColumnName="FilmNegativeFormat" />
-          <ScalarProperty Name="CinematographicProcess" ColumnName="CinematographicProcess" />
-          <ScalarProperty Name="PrintedFilmFormat" ColumnName="PrintedFilmFormat" />
-          <ScalarProperty Name="AspectRatio" ColumnName="AspectRatio" />
           <ScalarProperty Name="ReleaseDate" ColumnName="ReleaseDate" />
-          <ScalarProperty Name="FilmLength" ColumnName="FilmLength" />
-          <ScalarProperty Name="Budget" ColumnName="Budget" />
-          <ScalarProperty Name="OpeningWeekendGross" ColumnName="OpeningWeekendGross" />
-          <ScalarProperty Name="TotalGross" ColumnName="TotalGross" />
           <ScalarProperty Name="Tagline" ColumnName="Tagline" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -154,5 +144,29 @@
         <ScalarProperty Name="GenreId" ColumnName="GenreId" />
       </EndProperty>
     </AssociationSetMapping>
+    <EntitySetMapping Name="BoxOffices">
+      <EntityTypeMapping TypeName="IsTypeOf(MovieDBModel.BoxOffice)">
+        <MappingFragment StoreEntitySet="Film">
+          <ScalarProperty Name="TotalGross" ColumnName="TotalGross" />
+          <ScalarProperty Name="OpeningWeekendGross" ColumnName="OpeningWeekendGross" />
+          <ScalarProperty Name="Budget" ColumnName="Budget" />
+          <ScalarProperty Name="FilmId" ColumnName="FilmId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TechnicalDetails">
+      <EntityTypeMapping TypeName="IsTypeOf(MovieDBModel.TechnicalDetails)">
+        <MappingFragment StoreEntitySet="Film">
+          <ScalarProperty Name="FilmLength" ColumnName="FilmLength" />
+          <ScalarProperty Name="AspectRatio" ColumnName="AspectRatio" />
+          <ScalarProperty Name="PrintedFilmFormat" ColumnName="PrintedFilmFormat" />
+          <ScalarProperty Name="CinematographicProcess" ColumnName="CinematographicProcess" />
+          <ScalarProperty Name="FilmNegativeFormat" ColumnName="FilmNegativeFormat" />
+          <ScalarProperty Name="Laboratory" ColumnName="Laboratory" />
+          <ScalarProperty Name="Camera" ColumnName="Camera" />
+          <ScalarProperty Name="FilmId" ColumnName="FilmId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
