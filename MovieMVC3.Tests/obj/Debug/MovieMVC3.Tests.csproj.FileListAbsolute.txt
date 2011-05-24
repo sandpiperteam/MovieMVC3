@@ -1,0 +1,8 @@
+c:\_src\MovieMVC3\MovieMVC3.Tests\bin\Debug\MovieMVC3.Tests.dll.config
+c:\_src\MovieMVC3\MovieMVC3.Tests\bin\Debug\MovieMVC3.Tests.dll
+c:\_src\MovieMVC3\MovieMVC3.Tests\bin\Debug\MovieMVC3.Tests.pdb
+c:\_src\MovieMVC3\MovieMVC3.Tests\bin\Debug\MovieMVC3.dll
+c:\_src\MovieMVC3\MovieMVC3.Tests\bin\Debug\MovieMVC3.pdb
+c:\_src\MovieMVC3\MovieMVC3.Tests\obj\Debug\ResolveAssemblyReference.cache
+c:\_src\MovieMVC3\MovieMVC3.Tests\obj\Debug\MovieMVC3.Tests.dll
+c:\_src\MovieMVC3\MovieMVC3.Tests\obj\Debug\MovieMVC3.Tests.pdb

@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieMVC3", "MovieMVC3\MovieMVC3.csproj", "{2DE376B4-2B2B-4B57-8769-56C107CD0365}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieMVC3.Tests", "MovieMVC3.Tests\MovieMVC3.Tests.csproj", "{DD79C6C0-AD46-4660-B3E8-6B59E055AFC5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2DE376B4-2B2B-4B57-8769-56C107CD0365}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DE376B4-2B2B-4B57-8769-56C107CD0365}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DE376B4-2B2B-4B57-8769-56C107CD0365}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DE376B4-2B2B-4B57-8769-56C107CD0365}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD79C6C0-AD46-4660-B3E8-6B59E055AFC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD79C6C0-AD46-4660-B3E8-6B59E055AFC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD79C6C0-AD46-4660-B3E8-6B59E055AFC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD79C6C0-AD46-4660-B3E8-6B59E055AFC5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

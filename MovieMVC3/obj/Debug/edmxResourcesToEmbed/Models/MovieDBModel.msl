@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MovieDBModelStoreContainer" CdmEntityContainer="MovieDBEntities">
+    <EntitySetMapping Name="CrewMembers">
+      <EntityTypeMapping TypeName="MovieDBModel.CrewMember">
+        <MappingFragment StoreEntitySet="CrewMember">
+          <ScalarProperty Name="FilmId" ColumnName="FilmId" />
+          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+          <ScalarProperty Name="CrewRoleId" ColumnName="CrewRoleId" />
+          <ScalarProperty Name="CrewMemberId" ColumnName="CrewMemberId" />
+          <ScalarProperty Name="BillingPosition" ColumnName="BillingPosition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CrewRoles">
+      <EntityTypeMapping TypeName="MovieDBModel.CrewRole">
+        <MappingFragment StoreEntitySet="CrewRole">
+          <ScalarProperty Name="CrewRoleId" ColumnName="CrewRoleId" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Films">
+      <EntityTypeMapping TypeName="MovieDBModel.Film">
+        <MappingFragment StoreEntitySet="Film">
+          <ScalarProperty Name="FilmId" ColumnName="FilmId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Duration" ColumnName="Duration" />
+          <ScalarProperty Name="Rating" ColumnName="Rating" />
+          <ScalarProperty Name="Camera" ColumnName="Camera" />
+          <ScalarProperty Name="Laboratory" ColumnName="Laboratory" />
+          <ScalarProperty Name="FilmNegativeFormat" ColumnName="FilmNegativeFormat" />
+          <ScalarProperty Name="CinematographicProcess" ColumnName="CinematographicProcess" />
+          <ScalarProperty Name="PrintedFilmFormat" ColumnName="PrintedFilmFormat" />
+          <ScalarProperty Name="AspectRatio" ColumnName="AspectRatio" />
+          <ScalarProperty Name="ReleaseDate" ColumnName="ReleaseDate" />
+          <ScalarProperty Name="FilmLength" ColumnName="FilmLength" />
+          <ScalarProperty Name="Budget" ColumnName="Budget" />
+          <ScalarProperty Name="OpeningWeekendGross" ColumnName="OpeningWeekendGross" />
+          <ScalarProperty Name="TotalGross" ColumnName="TotalGross" />
+          <ScalarProperty Name="Tagline" ColumnName="Tagline" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FilmCharacters">
+      <EntityTypeMapping TypeName="MovieDBModel.FilmCharacter">
+        <MappingFragment StoreEntitySet="FilmCharacter">
+          <ScalarProperty Name="FilmCharacterId" ColumnName="FilmCharacterId" />
+          <ScalarProperty Name="CrewMemberId" ColumnName="CrewMemberId" />
+          <ScalarProperty Name="CharacterName" ColumnName="CharacterName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Genres">
+      <EntityTypeMapping TypeName="MovieDBModel.Genre">
+        <MappingFragment StoreEntitySet="Genre">
+          <ScalarProperty Name="GenreId" ColumnName="GenreId" />
+          <ScalarProperty Name="GenreType" ColumnName="GenreType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KeywordLists">
+      <EntityTypeMapping TypeName="MovieDBModel.KeywordList">
+        <MappingFragment StoreEntitySet="KeywordList">
+          <ScalarProperty Name="KeywordId" ColumnName="KeywordId" />
+          <ScalarProperty Name="Keyword" ColumnName="Keyword" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="People">
+      <EntityTypeMapping TypeName="MovieDBModel.Person">
+        <MappingFragment StoreEntitySet="Person">
+          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PlotKeywords">
+      <EntityTypeMapping TypeName="MovieDBModel.PlotKeyword">
+        <MappingFragment StoreEntitySet="PlotKeyword">
+          <ScalarProperty Name="PlotKeywordId" ColumnName="PlotKeywordId" />
+          <ScalarProperty Name="FilmId" ColumnName="FilmId" />
+          <ScalarProperty Name="KeywordId" ColumnName="KeywordId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Quotes">
+      <EntityTypeMapping TypeName="MovieDBModel.Quote">
+        <MappingFragment StoreEntitySet="Quotes">
+          <ScalarProperty Name="QuoteId" ColumnName="QuoteId" />
+          <ScalarProperty Name="QuoteText" ColumnName="QuoteText" />
+          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="FilmId" ColumnName="FilmId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reviews">
+      <EntityTypeMapping TypeName="MovieDBModel.Review">
+        <MappingFragment StoreEntitySet="Review">
+          <ScalarProperty Name="ReviewId" ColumnName="ReviewId" />
+          <ScalarProperty Name="ReviewText" ColumnName="ReviewText" />
+          <ScalarProperty Name="Rating" ColumnName="Rating" />
+          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+          <ScalarProperty Name="IsVisible" ColumnName="IsVisible" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="FilmId" ColumnName="FilmId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Storylines">
+      <EntityTypeMapping TypeName="MovieDBModel.Storyline">
+        <MappingFragment StoreEntitySet="Storyline">
+          <ScalarProperty Name="StorylineId" ColumnName="StorylineId" />
+          <ScalarProperty Name="FilmId" ColumnName="FilmId" />
+          <ScalarProperty Name="PlotSynopsis" ColumnName="PlotSynopsis" />
+          <ScalarProperty Name="PlotSummary" ColumnName="PlotSummary" />
+          <ScalarProperty Name="StoryOutline" ColumnName="StoryOutline" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Trivias">
+      <EntityTypeMapping TypeName="MovieDBModel.Trivia">
+        <MappingFragment StoreEntitySet="Trivia">
+          <ScalarProperty Name="TriviaId" ColumnName="TriviaId" />
+          <ScalarProperty Name="TriviaText" ColumnName="TriviaText" />
+          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="FilmId" ColumnName="FilmId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserAccounts">
+      <EntityTypeMapping TypeName="MovieDBModel.UserAccount">
+        <MappingFragment StoreEntitySet="UserAccount">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="AccountDisabled" ColumnName="AccountDisabled" />
+          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="FilmGenre" TypeName="MovieDBModel.FilmGenre" StoreEntitySet="FilmGenre">
+      <EndProperty Name="Film">
+        <ScalarProperty Name="FilmId" ColumnName="FilmId" />
+      </EndProperty>
+      <EndProperty Name="Genre">
+        <ScalarProperty Name="GenreId" ColumnName="GenreId" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

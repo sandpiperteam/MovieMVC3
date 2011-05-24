@@ -1,0 +1,1052 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MovieDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="MovieDBModelStoreContainer">
+          <EntitySet Name="CrewMember" EntityType="MovieDBModel.Store.CrewMember" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CrewRole" EntityType="MovieDBModel.Store.CrewRole" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Film" EntityType="MovieDBModel.Store.Film" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="FilmCharacter" EntityType="MovieDBModel.Store.FilmCharacter" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="FilmGenre" EntityType="MovieDBModel.Store.FilmGenre" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Genre" EntityType="MovieDBModel.Store.Genre" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="KeywordList" EntityType="MovieDBModel.Store.KeywordList" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Person" EntityType="MovieDBModel.Store.Person" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PlotKeyword" EntityType="MovieDBModel.Store.PlotKeyword" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Quotes" EntityType="MovieDBModel.Store.Quotes" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Review" EntityType="MovieDBModel.Store.Review" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Storyline" EntityType="MovieDBModel.Store.Storyline" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Trivia" EntityType="MovieDBModel.Store.Trivia" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserAccount" EntityType="MovieDBModel.Store.UserAccount" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_CrewMember_CrewRole" Association="MovieDBModel.Store.FK_CrewMember_CrewRole">
+            <End Role="CrewRole" EntitySet="CrewRole" />
+            <End Role="CrewMember" EntitySet="CrewMember" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CrewMember_Film" Association="MovieDBModel.Store.FK_CrewMember_Film">
+            <End Role="Film" EntitySet="Film" />
+            <End Role="CrewMember" EntitySet="CrewMember" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CrewMember_Person" Association="MovieDBModel.Store.FK_CrewMember_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="CrewMember" EntitySet="CrewMember" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FilmCharacter_CrewMember" Association="MovieDBModel.Store.FK_FilmCharacter_CrewMember">
+            <End Role="CrewMember" EntitySet="CrewMember" />
+            <End Role="FilmCharacter" EntitySet="FilmCharacter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FilmGenre_Film1" Association="MovieDBModel.Store.FK_FilmGenre_Film1">
+            <End Role="Film" EntitySet="Film" />
+            <End Role="FilmGenre" EntitySet="FilmGenre" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FilmGenre_Genre" Association="MovieDBModel.Store.FK_FilmGenre_Genre">
+            <End Role="Genre" EntitySet="Genre" />
+            <End Role="FilmGenre" EntitySet="FilmGenre" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlotKeyword_Film" Association="MovieDBModel.Store.FK_PlotKeyword_Film">
+            <End Role="Film" EntitySet="Film" />
+            <End Role="PlotKeyword" EntitySet="PlotKeyword" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlotKeyword_Keywords" Association="MovieDBModel.Store.FK_PlotKeyword_Keywords">
+            <End Role="KeywordList" EntitySet="KeywordList" />
+            <End Role="PlotKeyword" EntitySet="PlotKeyword" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Quotes_Film" Association="MovieDBModel.Store.FK_Quotes_Film">
+            <End Role="Film" EntitySet="Film" />
+            <End Role="Quotes" EntitySet="Quotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Quotes_UserAccount" Association="MovieDBModel.Store.FK_Quotes_UserAccount">
+            <End Role="UserAccount" EntitySet="UserAccount" />
+            <End Role="Quotes" EntitySet="Quotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Review_Film" Association="MovieDBModel.Store.FK_Review_Film">
+            <End Role="Film" EntitySet="Film" />
+            <End Role="Review" EntitySet="Review" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Review_UserAccount" Association="MovieDBModel.Store.FK_Review_UserAccount">
+            <End Role="UserAccount" EntitySet="UserAccount" />
+            <End Role="Review" EntitySet="Review" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Storyline_Film" Association="MovieDBModel.Store.FK_Storyline_Film">
+            <End Role="Film" EntitySet="Film" />
+            <End Role="Storyline" EntitySet="Storyline" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trivia_Film" Association="MovieDBModel.Store.FK_Trivia_Film">
+            <End Role="Film" EntitySet="Film" />
+            <End Role="Trivia" EntitySet="Trivia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trivia_UserAccount" Association="MovieDBModel.Store.FK_Trivia_UserAccount">
+            <End Role="UserAccount" EntitySet="UserAccount" />
+            <End Role="Trivia" EntitySet="Trivia" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="CrewMember">
+          <Key>
+            <PropertyRef Name="CrewMemberId" />
+          </Key>
+          <Property Name="FilmId" Type="int" Nullable="false" />
+          <Property Name="PersonId" Type="int" Nullable="false" />
+          <Property Name="CrewRoleId" Type="int" Nullable="false" />
+          <Property Name="CrewMemberId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="BillingPosition" Type="int" />
+        </EntityType>
+        <EntityType Name="CrewRole">
+          <Key>
+            <PropertyRef Name="CrewRoleId" />
+          </Key>
+          <Property Name="CrewRoleId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Role" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Film">
+          <Key>
+            <PropertyRef Name="FilmId" />
+          </Key>
+          <Property Name="FilmId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Duration" Type="int" />
+          <Property Name="Rating" Type="varchar" MaxLength="3" />
+          <Property Name="Camera" Type="varchar" MaxLength="50" />
+          <Property Name="Laboratory" Type="varchar" MaxLength="50" />
+          <Property Name="FilmNegativeFormat" Type="varchar" MaxLength="50" />
+          <Property Name="CinematographicProcess" Type="varchar" MaxLength="50" />
+          <Property Name="PrintedFilmFormat" Type="varchar" MaxLength="50" />
+          <Property Name="AspectRatio" Type="varchar" MaxLength="50" />
+          <Property Name="ReleaseDate" Type="date" />
+          <Property Name="FilmLength" Type="int" />
+          <Property Name="Budget" Type="int" />
+          <Property Name="OpeningWeekendGross" Type="int" />
+          <Property Name="TotalGross" Type="int" />
+          <Property Name="Tagline" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="FilmCharacter">
+          <Key>
+            <PropertyRef Name="FilmCharacterId" />
+          </Key>
+          <Property Name="FilmCharacterId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CrewMemberId" Type="int" Nullable="false" />
+          <Property Name="CharacterName" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="FilmGenre">
+          <Key>
+            <PropertyRef Name="FilmId" />
+            <PropertyRef Name="GenreId" />
+          </Key>
+          <Property Name="FilmId" Type="int" Nullable="false" />
+          <Property Name="GenreId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Genre">
+          <Key>
+            <PropertyRef Name="GenreId" />
+          </Key>
+          <Property Name="GenreId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="GenreType" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="KeywordList">
+          <Key>
+            <PropertyRef Name="KeywordId" />
+          </Key>
+          <Property Name="KeywordId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Keyword" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="PersonId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="LastName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="DateOfBirth" Type="date" />
+          <Property Name="Sex" Type="varchar" Nullable="false" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="PlotKeyword">
+          <Key>
+            <PropertyRef Name="PlotKeywordId" />
+          </Key>
+          <Property Name="PlotKeywordId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FilmId" Type="int" Nullable="false" />
+          <Property Name="KeywordId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Quotes">
+          <Key>
+            <PropertyRef Name="QuoteId" />
+          </Key>
+          <Property Name="QuoteId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="QuoteText" Type="varchar(max)" Nullable="false" />
+          <Property Name="DateAdded" Type="date" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="FilmId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Review">
+          <Key>
+            <PropertyRef Name="ReviewId" />
+          </Key>
+          <Property Name="ReviewId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ReviewText" Type="varchar(max)" Nullable="false" />
+          <Property Name="Rating" Type="int" Nullable="false" />
+          <Property Name="DateAdded" Type="date" Nullable="false" />
+          <Property Name="IsVisible" Type="bit" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="FilmId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Storyline">
+          <Key>
+            <PropertyRef Name="StorylineId" />
+          </Key>
+          <Property Name="StorylineId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FilmId" Type="int" Nullable="false" />
+          <Property Name="PlotSynopsis" Type="varchar(max)" Nullable="false" />
+          <Property Name="PlotSummary" Type="varchar(max)" Nullable="false" />
+          <Property Name="StoryOutline" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Trivia">
+          <Key>
+            <PropertyRef Name="TriviaId" />
+          </Key>
+          <Property Name="TriviaId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TriviaText" Type="varchar(max)" Nullable="false" />
+          <Property Name="DateAdded" Type="date" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="FilmId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserAccount">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="EmailAddress" Type="varchar" Nullable="false" MaxLength="60" />
+          <Property Name="AccountDisabled" Type="bit" Nullable="false" />
+          <Property Name="DateAdded" Type="date" Nullable="false" />
+          <Property Name="PasswordHash" Type="varchar(max)" />
+          <Property Name="PasswordSalt" Type="varchar(max)" />
+        </EntityType>
+        <Association Name="FK_CrewMember_CrewRole">
+          <End Role="CrewRole" Type="MovieDBModel.Store.CrewRole" Multiplicity="1" />
+          <End Role="CrewMember" Type="MovieDBModel.Store.CrewMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CrewRole">
+              <PropertyRef Name="CrewRoleId" />
+            </Principal>
+            <Dependent Role="CrewMember">
+              <PropertyRef Name="CrewRoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CrewMember_Film">
+          <End Role="Film" Type="MovieDBModel.Store.Film" Multiplicity="1" />
+          <End Role="CrewMember" Type="MovieDBModel.Store.CrewMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Film">
+              <PropertyRef Name="FilmId" />
+            </Principal>
+            <Dependent Role="CrewMember">
+              <PropertyRef Name="FilmId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CrewMember_Person">
+          <End Role="Person" Type="MovieDBModel.Store.Person" Multiplicity="1" />
+          <End Role="CrewMember" Type="MovieDBModel.Store.CrewMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="CrewMember">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FilmCharacter_CrewMember">
+          <End Role="CrewMember" Type="MovieDBModel.Store.CrewMember" Multiplicity="1" />
+          <End Role="FilmCharacter" Type="MovieDBModel.Store.FilmCharacter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CrewMember">
+              <PropertyRef Name="CrewMemberId" />
+            </Principal>
+            <Dependent Role="FilmCharacter">
+              <PropertyRef Name="CrewMemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FilmGenre_Film1">
+          <End Role="Film" Type="MovieDBModel.Store.Film" Multiplicity="1" />
+          <End Role="FilmGenre" Type="MovieDBModel.Store.FilmGenre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Film">
+              <PropertyRef Name="FilmId" />
+            </Principal>
+            <Dependent Role="FilmGenre">
+              <PropertyRef Name="FilmId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FilmGenre_Genre">
+          <End Role="Genre" Type="MovieDBModel.Store.Genre" Multiplicity="1" />
+          <End Role="FilmGenre" Type="MovieDBModel.Store.FilmGenre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genre">
+              <PropertyRef Name="GenreId" />
+            </Principal>
+            <Dependent Role="FilmGenre">
+              <PropertyRef Name="GenreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlotKeyword_Film">
+          <End Role="Film" Type="MovieDBModel.Store.Film" Multiplicity="1" />
+          <End Role="PlotKeyword" Type="MovieDBModel.Store.PlotKeyword" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Film">
+              <PropertyRef Name="FilmId" />
+            </Principal>
+            <Dependent Role="PlotKeyword">
+              <PropertyRef Name="FilmId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlotKeyword_Keywords">
+          <End Role="KeywordList" Type="MovieDBModel.Store.KeywordList" Multiplicity="1" />
+          <End Role="PlotKeyword" Type="MovieDBModel.Store.PlotKeyword" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KeywordList">
+              <PropertyRef Name="KeywordId" />
+            </Principal>
+            <Dependent Role="PlotKeyword">
+              <PropertyRef Name="KeywordId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Quotes_Film">
+          <End Role="Film" Type="MovieDBModel.Store.Film" Multiplicity="1" />
+          <End Role="Quotes" Type="MovieDBModel.Store.Quotes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Film">
+              <PropertyRef Name="FilmId" />
+            </Principal>
+            <Dependent Role="Quotes">
+              <PropertyRef Name="FilmId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Quotes_UserAccount">
+          <End Role="UserAccount" Type="MovieDBModel.Store.UserAccount" Multiplicity="1" />
+          <End Role="Quotes" Type="MovieDBModel.Store.Quotes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserAccount">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Quotes">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Review_Film">
+          <End Role="Film" Type="MovieDBModel.Store.Film" Multiplicity="1" />
+          <End Role="Review" Type="MovieDBModel.Store.Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Film">
+              <PropertyRef Name="FilmId" />
+            </Principal>
+            <Dependent Role="Review">
+              <PropertyRef Name="FilmId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Review_UserAccount">
+          <End Role="UserAccount" Type="MovieDBModel.Store.UserAccount" Multiplicity="1" />
+          <End Role="Review" Type="MovieDBModel.Store.Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserAccount">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Review">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Storyline_Film">
+          <End Role="Film" Type="MovieDBModel.Store.Film" Multiplicity="1" />
+          <End Role="Storyline" Type="MovieDBModel.Store.Storyline" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Film">
+              <PropertyRef Name="FilmId" />
+            </Principal>
+            <Dependent Role="Storyline">
+              <PropertyRef Name="FilmId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trivia_Film">
+          <End Role="Film" Type="MovieDBModel.Store.Film" Multiplicity="1" />
+          <End Role="Trivia" Type="MovieDBModel.Store.Trivia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Film">
+              <PropertyRef Name="FilmId" />
+            </Principal>
+            <Dependent Role="Trivia">
+              <PropertyRef Name="FilmId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trivia_UserAccount">
+          <End Role="UserAccount" Type="MovieDBModel.Store.UserAccount" Multiplicity="1" />
+          <End Role="Trivia" Type="MovieDBModel.Store.Trivia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserAccount">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Trivia">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MovieDBModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="MovieDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CrewMembers" EntityType="MovieDBModel.CrewMember" />
+          <EntitySet Name="CrewRoles" EntityType="MovieDBModel.CrewRole" />
+          <EntitySet Name="Films" EntityType="MovieDBModel.Film" />
+          <EntitySet Name="FilmCharacters" EntityType="MovieDBModel.FilmCharacter" />
+          <EntitySet Name="Genres" EntityType="MovieDBModel.Genre" />
+          <EntitySet Name="KeywordLists" EntityType="MovieDBModel.KeywordList" />
+          <EntitySet Name="People" EntityType="MovieDBModel.Person" />
+          <EntitySet Name="PlotKeywords" EntityType="MovieDBModel.PlotKeyword" />
+          <EntitySet Name="Quotes" EntityType="MovieDBModel.Quote" />
+          <EntitySet Name="Reviews" EntityType="MovieDBModel.Review" />
+          <EntitySet Name="Storylines" EntityType="MovieDBModel.Storyline" />
+          <EntitySet Name="Trivias" EntityType="MovieDBModel.Trivia" />
+          <EntitySet Name="UserAccounts" EntityType="MovieDBModel.UserAccount" />
+          <AssociationSet Name="FK_CrewMember_CrewRole" Association="MovieDBModel.FK_CrewMember_CrewRole">
+            <End Role="CrewRole" EntitySet="CrewRoles" />
+            <End Role="CrewMember" EntitySet="CrewMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CrewMember_Film" Association="MovieDBModel.FK_CrewMember_Film">
+            <End Role="Film" EntitySet="Films" />
+            <End Role="CrewMember" EntitySet="CrewMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CrewMember_Person" Association="MovieDBModel.FK_CrewMember_Person">
+            <End Role="Person" EntitySet="People" />
+            <End Role="CrewMember" EntitySet="CrewMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FilmCharacter_CrewMember" Association="MovieDBModel.FK_FilmCharacter_CrewMember">
+            <End Role="CrewMember" EntitySet="CrewMembers" />
+            <End Role="FilmCharacter" EntitySet="FilmCharacters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlotKeyword_Film" Association="MovieDBModel.FK_PlotKeyword_Film">
+            <End Role="Film" EntitySet="Films" />
+            <End Role="PlotKeyword" EntitySet="PlotKeywords" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Quotes_Film" Association="MovieDBModel.FK_Quotes_Film">
+            <End Role="Film" EntitySet="Films" />
+            <End Role="Quotes" EntitySet="Quotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Review_Film" Association="MovieDBModel.FK_Review_Film">
+            <End Role="Film" EntitySet="Films" />
+            <End Role="Review" EntitySet="Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Storyline_Film" Association="MovieDBModel.FK_Storyline_Film">
+            <End Role="Film" EntitySet="Films" />
+            <End Role="Storyline" EntitySet="Storylines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trivia_Film" Association="MovieDBModel.FK_Trivia_Film">
+            <End Role="Film" EntitySet="Films" />
+            <End Role="Trivia" EntitySet="Trivias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlotKeyword_Keywords" Association="MovieDBModel.FK_PlotKeyword_Keywords">
+            <End Role="KeywordList" EntitySet="KeywordLists" />
+            <End Role="PlotKeyword" EntitySet="PlotKeywords" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Quotes_UserAccount" Association="MovieDBModel.FK_Quotes_UserAccount">
+            <End Role="UserAccount" EntitySet="UserAccounts" />
+            <End Role="Quotes" EntitySet="Quotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Review_UserAccount" Association="MovieDBModel.FK_Review_UserAccount">
+            <End Role="UserAccount" EntitySet="UserAccounts" />
+            <End Role="Review" EntitySet="Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trivia_UserAccount" Association="MovieDBModel.FK_Trivia_UserAccount">
+            <End Role="UserAccount" EntitySet="UserAccounts" />
+            <End Role="Trivia" EntitySet="Trivias" />
+          </AssociationSet>
+          <AssociationSet Name="FilmGenre" Association="MovieDBModel.FilmGenre">
+            <End Role="Film" EntitySet="Films" />
+            <End Role="Genre" EntitySet="Genres" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="CrewMember">
+          <Key>
+            <PropertyRef Name="CrewMemberId" />
+          </Key>
+          <Property Name="FilmId" Type="Int32" Nullable="false" />
+          <Property Name="PersonId" Type="Int32" Nullable="false" />
+          <Property Name="CrewRoleId" Type="Int32" Nullable="false" />
+          <Property Name="CrewMemberId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BillingPosition" Type="Int32" />
+          <NavigationProperty Name="CrewRole" Relationship="MovieDBModel.FK_CrewMember_CrewRole" FromRole="CrewMember" ToRole="CrewRole" />
+          <NavigationProperty Name="Film" Relationship="MovieDBModel.FK_CrewMember_Film" FromRole="CrewMember" ToRole="Film" />
+          <NavigationProperty Name="Person" Relationship="MovieDBModel.FK_CrewMember_Person" FromRole="CrewMember" ToRole="Person" />
+          <NavigationProperty Name="FilmCharacters" Relationship="MovieDBModel.FK_FilmCharacter_CrewMember" FromRole="CrewMember" ToRole="FilmCharacter" />
+        </EntityType>
+        <EntityType Name="CrewRole">
+          <Key>
+            <PropertyRef Name="CrewRoleId" />
+          </Key>
+          <Property Name="CrewRoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Role" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="CrewMembers" Relationship="MovieDBModel.FK_CrewMember_CrewRole" FromRole="CrewRole" ToRole="CrewMember" />
+        </EntityType>
+        <EntityType Name="Film">
+          <Key>
+            <PropertyRef Name="FilmId" />
+          </Key>
+          <Property Name="FilmId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Duration" Type="Int32" />
+          <Property Name="Rating" Type="String" MaxLength="3" Unicode="false" FixedLength="false" />
+          <Property Name="Camera" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Laboratory" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="FilmNegativeFormat" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="CinematographicProcess" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="PrintedFilmFormat" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="AspectRatio" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="ReleaseDate" Type="DateTime" />
+          <Property Name="FilmLength" Type="Int32" />
+          <Property Name="Budget" Type="Int32" />
+          <Property Name="OpeningWeekendGross" Type="Int32" />
+          <Property Name="TotalGross" Type="Int32" />
+          <Property Name="Tagline" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="CrewMembers" Relationship="MovieDBModel.FK_CrewMember_Film" FromRole="Film" ToRole="CrewMember" />
+          <NavigationProperty Name="PlotKeywords" Relationship="MovieDBModel.FK_PlotKeyword_Film" FromRole="Film" ToRole="PlotKeyword" />
+          <NavigationProperty Name="Quotes" Relationship="MovieDBModel.FK_Quotes_Film" FromRole="Film" ToRole="Quotes" />
+          <NavigationProperty Name="Reviews" Relationship="MovieDBModel.FK_Review_Film" FromRole="Film" ToRole="Review" />
+          <NavigationProperty Name="Storylines" Relationship="MovieDBModel.FK_Storyline_Film" FromRole="Film" ToRole="Storyline" />
+          <NavigationProperty Name="Trivias" Relationship="MovieDBModel.FK_Trivia_Film" FromRole="Film" ToRole="Trivia" />
+          <NavigationProperty Name="Genres" Relationship="MovieDBModel.FilmGenre" FromRole="Film" ToRole="Genre" />
+        </EntityType>
+        <EntityType Name="FilmCharacter">
+          <Key>
+            <PropertyRef Name="FilmCharacterId" />
+          </Key>
+          <Property Name="FilmCharacterId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CrewMemberId" Type="Int32" Nullable="false" />
+          <Property Name="CharacterName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="CrewMember" Relationship="MovieDBModel.FK_FilmCharacter_CrewMember" FromRole="FilmCharacter" ToRole="CrewMember" />
+        </EntityType>
+        <EntityType Name="Genre">
+          <Key>
+            <PropertyRef Name="GenreId" />
+          </Key>
+          <Property Name="GenreId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GenreType" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Films" Relationship="MovieDBModel.FilmGenre" FromRole="Genre" ToRole="Film" />
+        </EntityType>
+        <EntityType Name="KeywordList">
+          <Key>
+            <PropertyRef Name="KeywordId" />
+          </Key>
+          <Property Name="KeywordId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Keyword" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="PlotKeywords" Relationship="MovieDBModel.FK_PlotKeyword_Keywords" FromRole="KeywordList" ToRole="PlotKeyword" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="PersonId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="DateOfBirth" Type="DateTime" />
+          <Property Name="Sex" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="CrewMembers" Relationship="MovieDBModel.FK_CrewMember_Person" FromRole="Person" ToRole="CrewMember" />
+        </EntityType>
+        <EntityType Name="PlotKeyword">
+          <Key>
+            <PropertyRef Name="PlotKeywordId" />
+          </Key>
+          <Property Name="PlotKeywordId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FilmId" Type="Int32" Nullable="false" />
+          <Property Name="KeywordId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Film" Relationship="MovieDBModel.FK_PlotKeyword_Film" FromRole="PlotKeyword" ToRole="Film" />
+          <NavigationProperty Name="KeywordList" Relationship="MovieDBModel.FK_PlotKeyword_Keywords" FromRole="PlotKeyword" ToRole="KeywordList" />
+        </EntityType>
+        <EntityType Name="Quote">
+          <Key>
+            <PropertyRef Name="QuoteId" />
+          </Key>
+          <Property Name="QuoteId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QuoteText" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="DateAdded" Type="DateTime" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="FilmId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Film" Relationship="MovieDBModel.FK_Quotes_Film" FromRole="Quotes" ToRole="Film" />
+          <NavigationProperty Name="UserAccount" Relationship="MovieDBModel.FK_Quotes_UserAccount" FromRole="Quotes" ToRole="UserAccount" />
+        </EntityType>
+        <EntityType Name="Review">
+          <Key>
+            <PropertyRef Name="ReviewId" />
+          </Key>
+          <Property Name="ReviewId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReviewText" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="Rating" Type="Int32" Nullable="false" />
+          <Property Name="DateAdded" Type="DateTime" Nullable="false" />
+          <Property Name="IsVisible" Type="Boolean" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="FilmId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Film" Relationship="MovieDBModel.FK_Review_Film" FromRole="Review" ToRole="Film" />
+          <NavigationProperty Name="UserAccount" Relationship="MovieDBModel.FK_Review_UserAccount" FromRole="Review" ToRole="UserAccount" />
+        </EntityType>
+        <EntityType Name="Storyline">
+          <Key>
+            <PropertyRef Name="StorylineId" />
+          </Key>
+          <Property Name="StorylineId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FilmId" Type="Int32" Nullable="false" />
+          <Property Name="PlotSynopsis" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="PlotSummary" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="StoryOutline" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Film" Relationship="MovieDBModel.FK_Storyline_Film" FromRole="Storyline" ToRole="Film" />
+        </EntityType>
+        <EntityType Name="Trivia">
+          <Key>
+            <PropertyRef Name="TriviaId" />
+          </Key>
+          <Property Name="TriviaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TriviaText" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="DateAdded" Type="DateTime" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="FilmId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Film" Relationship="MovieDBModel.FK_Trivia_Film" FromRole="Trivia" ToRole="Film" />
+          <NavigationProperty Name="UserAccount" Relationship="MovieDBModel.FK_Trivia_UserAccount" FromRole="Trivia" ToRole="UserAccount" />
+        </EntityType>
+        <EntityType Name="UserAccount">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="40" Unicode="false" FixedLength="false" />
+          <Property Name="EmailAddress" Type="String" Nullable="false" MaxLength="60" Unicode="false" FixedLength="false" />
+          <Property Name="AccountDisabled" Type="Boolean" Nullable="false" />
+          <Property Name="DateAdded" Type="DateTime" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="PasswordSalt" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Quotes" Relationship="MovieDBModel.FK_Quotes_UserAccount" FromRole="UserAccount" ToRole="Quotes" />
+          <NavigationProperty Name="Reviews" Relationship="MovieDBModel.FK_Review_UserAccount" FromRole="UserAccount" ToRole="Review" />
+          <NavigationProperty Name="Trivias" Relationship="MovieDBModel.FK_Trivia_UserAccount" FromRole="UserAccount" ToRole="Trivia" />
+        </EntityType>
+        <Association Name="FK_CrewMember_CrewRole">
+          <End Role="CrewRole" Type="MovieDBModel.CrewRole" Multiplicity="1" />
+          <End Role="CrewMember" Type="MovieDBModel.CrewMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CrewRole">
+              <PropertyRef Name="CrewRoleId" />
+            </Principal>
+            <Dependent Role="CrewMember">
+              <PropertyRef Name="CrewRoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CrewMember_Film">
+          <End Role="Film" Type="MovieDBModel.Film" Multiplicity="1" />
+          <End Role="CrewMember" Type="MovieDBModel.CrewMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Film">
+              <PropertyRef Name="FilmId" />
+            </Principal>
+            <Dependent Role="CrewMember">
+              <PropertyRef Name="FilmId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CrewMember_Person">
+          <End Role="Person" Type="MovieDBModel.Person" Multiplicity="1" />
+          <End Role="CrewMember" Type="MovieDBModel.CrewMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="CrewMember">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FilmCharacter_CrewMember">
+          <End Role="CrewMember" Type="MovieDBModel.CrewMember" Multiplicity="1" />
+          <End Role="FilmCharacter" Type="MovieDBModel.FilmCharacter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CrewMember">
+              <PropertyRef Name="CrewMemberId" />
+            </Principal>
+            <Dependent Role="FilmCharacter">
+              <PropertyRef Name="CrewMemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlotKeyword_Film">
+          <End Role="Film" Type="MovieDBModel.Film" Multiplicity="1" />
+          <End Role="PlotKeyword" Type="MovieDBModel.PlotKeyword" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Film">
+              <PropertyRef Name="FilmId" />
+            </Principal>
+            <Dependent Role="PlotKeyword">
+              <PropertyRef Name="FilmId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Quotes_Film">
+          <End Role="Film" Type="MovieDBModel.Film" Multiplicity="1" />
+          <End Role="Quotes" Type="MovieDBModel.Quote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Film">
+              <PropertyRef Name="FilmId" />
+            </Principal>
+            <Dependent Role="Quotes">
+              <PropertyRef Name="FilmId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Review_Film">
+          <End Role="Film" Type="MovieDBModel.Film" Multiplicity="1" />
+          <End Role="Review" Type="MovieDBModel.Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Film">
+              <PropertyRef Name="FilmId" />
+            </Principal>
+            <Dependent Role="Review">
+              <PropertyRef Name="FilmId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Storyline_Film">
+          <End Role="Film" Type="MovieDBModel.Film" Multiplicity="1" />
+          <End Role="Storyline" Type="MovieDBModel.Storyline" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Film">
+              <PropertyRef Name="FilmId" />
+            </Principal>
+            <Dependent Role="Storyline">
+              <PropertyRef Name="FilmId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trivia_Film">
+          <End Role="Film" Type="MovieDBModel.Film" Multiplicity="1" />
+          <End Role="Trivia" Type="MovieDBModel.Trivia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Film">
+              <PropertyRef Name="FilmId" />
+            </Principal>
+            <Dependent Role="Trivia">
+              <PropertyRef Name="FilmId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlotKeyword_Keywords">
+          <End Role="KeywordList" Type="MovieDBModel.KeywordList" Multiplicity="1" />
+          <End Role="PlotKeyword" Type="MovieDBModel.PlotKeyword" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KeywordList">
+              <PropertyRef Name="KeywordId" />
+            </Principal>
+            <Dependent Role="PlotKeyword">
+              <PropertyRef Name="KeywordId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Quotes_UserAccount">
+          <End Role="UserAccount" Type="MovieDBModel.UserAccount" Multiplicity="1" />
+          <End Role="Quotes" Type="MovieDBModel.Quote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserAccount">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Quotes">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Review_UserAccount">
+          <End Role="UserAccount" Type="MovieDBModel.UserAccount" Multiplicity="1" />
+          <End Role="Review" Type="MovieDBModel.Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserAccount">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Review">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trivia_UserAccount">
+          <End Role="UserAccount" Type="MovieDBModel.UserAccount" Multiplicity="1" />
+          <End Role="Trivia" Type="MovieDBModel.Trivia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserAccount">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Trivia">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FilmGenre">
+          <End Role="Film" Type="MovieDBModel.Film" Multiplicity="*" />
+          <End Role="Genre" Type="MovieDBModel.Genre" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MovieDBModelStoreContainer" CdmEntityContainer="MovieDBEntities">
+          <EntitySetMapping Name="CrewMembers"><EntityTypeMapping TypeName="MovieDBModel.CrewMember"><MappingFragment StoreEntitySet="CrewMember">
+            <ScalarProperty Name="FilmId" ColumnName="FilmId" />
+            <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+            <ScalarProperty Name="CrewRoleId" ColumnName="CrewRoleId" />
+            <ScalarProperty Name="CrewMemberId" ColumnName="CrewMemberId" />
+            <ScalarProperty Name="BillingPosition" ColumnName="BillingPosition" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="CrewRoles"><EntityTypeMapping TypeName="MovieDBModel.CrewRole"><MappingFragment StoreEntitySet="CrewRole">
+            <ScalarProperty Name="CrewRoleId" ColumnName="CrewRoleId" />
+            <ScalarProperty Name="Role" ColumnName="Role" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Films"><EntityTypeMapping TypeName="MovieDBModel.Film"><MappingFragment StoreEntitySet="Film">
+            <ScalarProperty Name="FilmId" ColumnName="FilmId" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="Duration" ColumnName="Duration" />
+            <ScalarProperty Name="Rating" ColumnName="Rating" />
+            <ScalarProperty Name="Camera" ColumnName="Camera" />
+            <ScalarProperty Name="Laboratory" ColumnName="Laboratory" />
+            <ScalarProperty Name="FilmNegativeFormat" ColumnName="FilmNegativeFormat" />
+            <ScalarProperty Name="CinematographicProcess" ColumnName="CinematographicProcess" />
+            <ScalarProperty Name="PrintedFilmFormat" ColumnName="PrintedFilmFormat" />
+            <ScalarProperty Name="AspectRatio" ColumnName="AspectRatio" />
+            <ScalarProperty Name="ReleaseDate" ColumnName="ReleaseDate" />
+            <ScalarProperty Name="FilmLength" ColumnName="FilmLength" />
+            <ScalarProperty Name="Budget" ColumnName="Budget" />
+            <ScalarProperty Name="OpeningWeekendGross" ColumnName="OpeningWeekendGross" />
+            <ScalarProperty Name="TotalGross" ColumnName="TotalGross" />
+            <ScalarProperty Name="Tagline" ColumnName="Tagline" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="FilmCharacters"><EntityTypeMapping TypeName="MovieDBModel.FilmCharacter"><MappingFragment StoreEntitySet="FilmCharacter">
+            <ScalarProperty Name="FilmCharacterId" ColumnName="FilmCharacterId" />
+            <ScalarProperty Name="CrewMemberId" ColumnName="CrewMemberId" />
+            <ScalarProperty Name="CharacterName" ColumnName="CharacterName" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Genres"><EntityTypeMapping TypeName="MovieDBModel.Genre"><MappingFragment StoreEntitySet="Genre">
+            <ScalarProperty Name="GenreId" ColumnName="GenreId" />
+            <ScalarProperty Name="GenreType" ColumnName="GenreType" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="KeywordLists"><EntityTypeMapping TypeName="MovieDBModel.KeywordList"><MappingFragment StoreEntitySet="KeywordList">
+            <ScalarProperty Name="KeywordId" ColumnName="KeywordId" />
+            <ScalarProperty Name="Keyword" ColumnName="Keyword" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="People"><EntityTypeMapping TypeName="MovieDBModel.Person"><MappingFragment StoreEntitySet="Person">
+            <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+            <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+            <ScalarProperty Name="LastName" ColumnName="LastName" />
+            <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+            <ScalarProperty Name="Sex" ColumnName="Sex" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="PlotKeywords"><EntityTypeMapping TypeName="MovieDBModel.PlotKeyword"><MappingFragment StoreEntitySet="PlotKeyword">
+            <ScalarProperty Name="PlotKeywordId" ColumnName="PlotKeywordId" />
+            <ScalarProperty Name="FilmId" ColumnName="FilmId" />
+            <ScalarProperty Name="KeywordId" ColumnName="KeywordId" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Quotes"><EntityTypeMapping TypeName="MovieDBModel.Quote"><MappingFragment StoreEntitySet="Quotes">
+            <ScalarProperty Name="QuoteId" ColumnName="QuoteId" />
+            <ScalarProperty Name="QuoteText" ColumnName="QuoteText" />
+            <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+            <ScalarProperty Name="UserId" ColumnName="UserId" />
+            <ScalarProperty Name="FilmId" ColumnName="FilmId" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Reviews"><EntityTypeMapping TypeName="MovieDBModel.Review"><MappingFragment StoreEntitySet="Review">
+            <ScalarProperty Name="ReviewId" ColumnName="ReviewId" />
+            <ScalarProperty Name="ReviewText" ColumnName="ReviewText" />
+            <ScalarProperty Name="Rating" ColumnName="Rating" />
+            <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+            <ScalarProperty Name="IsVisible" ColumnName="IsVisible" />
+            <ScalarProperty Name="UserId" ColumnName="UserId" />
+            <ScalarProperty Name="FilmId" ColumnName="FilmId" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Storylines"><EntityTypeMapping TypeName="MovieDBModel.Storyline"><MappingFragment StoreEntitySet="Storyline">
+            <ScalarProperty Name="StorylineId" ColumnName="StorylineId" />
+            <ScalarProperty Name="FilmId" ColumnName="FilmId" />
+            <ScalarProperty Name="PlotSynopsis" ColumnName="PlotSynopsis" />
+            <ScalarProperty Name="PlotSummary" ColumnName="PlotSummary" />
+            <ScalarProperty Name="StoryOutline" ColumnName="StoryOutline" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Trivias"><EntityTypeMapping TypeName="MovieDBModel.Trivia"><MappingFragment StoreEntitySet="Trivia">
+            <ScalarProperty Name="TriviaId" ColumnName="TriviaId" />
+            <ScalarProperty Name="TriviaText" ColumnName="TriviaText" />
+            <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+            <ScalarProperty Name="UserId" ColumnName="UserId" />
+            <ScalarProperty Name="FilmId" ColumnName="FilmId" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="UserAccounts"><EntityTypeMapping TypeName="MovieDBModel.UserAccount"><MappingFragment StoreEntitySet="UserAccount">
+            <ScalarProperty Name="UserId" ColumnName="UserId" />
+            <ScalarProperty Name="Username" ColumnName="Username" />
+            <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+            <ScalarProperty Name="AccountDisabled" ColumnName="AccountDisabled" />
+            <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+            <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+            <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <AssociationSetMapping Name="FilmGenre" TypeName="MovieDBModel.FilmGenre" StoreEntitySet="FilmGenre">
+            <EndProperty Name="Film">
+              <ScalarProperty Name="FilmId" ColumnName="FilmId" />
+            </EndProperty>
+            <EndProperty Name="Genre">
+              <ScalarProperty Name="GenreId" ColumnName="GenreId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="MovieDBModel">
+        <EntityTypeShape EntityType="MovieDBModel.CrewMember" Width="1.5" PointX="3" PointY="9.75" Height="2.7494921874999996" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieDBModel.CrewRole" Width="1.5" PointX="0.75" PointY="2.875" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieDBModel.Film" Width="1.5" PointX="0.75" PointY="9.375" Height="5.4417122395833317" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieDBModel.FilmCharacter" Width="1.5" PointX="5.25" PointY="5.25" Height="1.7879850260416657" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieDBModel.Genre" Width="1.5" PointX="3" PointY="13.375" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieDBModel.KeywordList" Width="1.5" PointX="3.75" PointY="16.25" Height="1.5956835937500031" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieDBModel.Person" Width="1.5" PointX="0.75" PointY="16.125" Height="2.172587890624996" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieDBModel.PlotKeyword" Width="1.5" PointX="6" PointY="11.125" Height="1.9802864583333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieDBModel.Quote" Width="1.5" PointX="6" PointY="7.875" Height="2.3648893229166674" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieDBModel.Review" Width="1.5" PointX="6" PointY="14.75" Height="2.7494921875000014" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieDBModel.Storyline" Width="1.5" PointX="3.25" PointY="18.375" Height="2.1725878906250031" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieDBModel.Trivia" Width="1.5" PointX="3" PointY="5.875" Height="2.3648893229166674" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieDBModel.UserAccount" Width="1.5" PointX="0.75" PointY="5.625" Height="2.9417936197916674" IsExpanded="true" />
+        <AssociationConnector Association="MovieDBModel.FK_CrewMember_CrewRole" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="4.47068359375" />
+          <ConnectorPoint PointX="2.625" PointY="4.84568359375" />
+          <ConnectorPoint PointX="2.625" PointY="11.12474609375" />
+          <ConnectorPoint PointX="3" PointY="11.12474609375" />
+        </AssociationConnector>
+        <AssociationConnector Association="MovieDBModel.FK_CrewMember_Film" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="10.374873046874999" />
+          <ConnectorPoint PointX="2.5416666666666665" PointY="10.374873046874999" />
+          <ConnectorPoint PointX="2.7083333333333335" PointY="10.374873046874999" />
+          <ConnectorPoint PointX="3" PointY="10.374873046874999" />
+        </AssociationConnector>
+        <AssociationConnector Association="MovieDBModel.FK_CrewMember_Person" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="16.188460538461534" />
+          <ConnectorPoint PointX="2.6875" PointY="15.750960538461534" />
+          <ConnectorPoint PointX="2.6875" PointY="11.843371140624999" />
+          <ConnectorPoint PointX="3" PointY="11.843371140624999" />
+        </AssociationConnector>
+        <AssociationConnector Association="MovieDBModel.FK_FilmCharacter_CrewMember" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="10.682444661458334" />
+          <ConnectorPoint PointX="5.59375" PointY="10.682444661458334" />
+          <ConnectorPoint PointX="5.59375" PointY="7.0379850260416656" />
+        </AssociationConnector>
+        <AssociationConnector Association="MovieDBModel.FK_PlotKeyword_Film" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="12.833639322916666" />
+          <ConnectorPoint PointX="2.6041666666666665" PointY="12.833639322916666" />
+          <ConnectorPoint PointX="2.7708333333333335" PointY="12.833639322916666" />
+          <ConnectorPoint PointX="5.666666666666667" PointY="12.833639322916666" />
+          <ConnectorPoint PointX="5.833333333333333" PointY="12.833639322916666" />
+          <ConnectorPoint PointX="6" PointY="12.833639322916666" />
+        </AssociationConnector>
+        <AssociationConnector Association="MovieDBModel.FK_Quotes_Film" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="9.53125" />
+          <ConnectorPoint PointX="2.5416666666666665" PointY="9.53125" />
+          <ConnectorPoint PointX="2.7083333333333335" PointY="9.53125" />
+          <ConnectorPoint PointX="5.510416666666667" PointY="9.5312499999999982" />
+          <ConnectorPoint PointX="5.833333333333333" PointY="9.53125" />
+          <ConnectorPoint PointX="6" PointY="9.53125" />
+        </AssociationConnector>
+        <AssociationConnector Association="MovieDBModel.FK_Review_Film" ManuallyRouted="false">
+          <ConnectorPoint PointX="1.5" PointY="14.816712239583332" />
+          <ConnectorPoint PointX="1.5" PointY="15.875" />
+          <ConnectorPoint PointX="2.4801272051282006" PointY="15.875" />
+          <ConnectorPoint PointX="2.6467938717948676" PointY="15.875" />
+          <ConnectorPoint PointX="2.7916666666666665" PointY="15.875" />
+          <ConnectorPoint PointX="2.9583333333333335" PointY="15.875" />
+          <ConnectorPoint PointX="4.822916666666667" PointY="15.875" />
+          <ConnectorPoint PointX="4.989583333333333" PointY="15.875" />
+          <ConnectorPoint PointX="5.625" PointY="15.875" />
+          <ConnectorPoint PointX="5.625" PointY="16.12474609375" />
+          <ConnectorPoint PointX="6" PointY="16.12474609375" />
+        </AssociationConnector>
+        <AssociationConnector Association="MovieDBModel.FK_Storyline_Film" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.2499999999999996" PointY="14.816712239583332" />
+          <ConnectorPoint PointX="2.6285744349011213" PointY="15.195286674484452" />
+          <ConnectorPoint PointX="2.7464255650988791" PointY="15.31313780468221" />
+          <ConnectorPoint PointX="2.875" PointY="15.441712239583332" />
+          <ConnectorPoint PointX="2.875" PointY="19.4612939453125" />
+          <ConnectorPoint PointX="3.25" PointY="19.4612939453125" />
+        </AssociationConnector>
+        <AssociationConnector Association="MovieDBModel.FK_Trivia_Film" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="9.43846053846154" />
+          <ConnectorPoint PointX="2.5660744349011204" PointY="9.1223861035604177" />
+          <ConnectorPoint PointX="2.6839255650988791" PointY="9.0045349733626612" />
+          <ConnectorPoint PointX="2.8125" PointY="8.87596053846154" />
+          <ConnectorPoint PointX="2.8125" PointY="7.0574446614583337" />
+          <ConnectorPoint PointX="3" PointY="7.0574446614583337" />
+        </AssociationConnector>
+        <AssociationConnector Association="MovieDBModel.FK_PlotKeyword_Keywords" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.90625" PointY="16.25" />
+          <ConnectorPoint PointX="4.90625" PointY="13.000715390625" />
+          <ConnectorPoint PointX="5.666666666666667" PointY="13.000715390625" />
+          <ConnectorPoint PointX="5.833333333333333" PointY="13.000715390625" />
+          <ConnectorPoint PointX="6" PointY="13.000715390625" />
+        </AssociationConnector>
+        <AssociationConnector Association="MovieDBModel.FK_Quotes_UserAccount" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="8.4345914713541674" />
+          <ConnectorPoint PointX="2.5416666666666665" PointY="8.4345914713541674" />
+          <ConnectorPoint PointX="2.7083333333333335" PointY="8.4345914713541674" />
+          <ConnectorPoint PointX="2.7291666666666665" PointY="8.4345914713541674" />
+          <ConnectorPoint PointX="2.8958333333333335" PointY="8.4345914713541674" />
+          <ConnectorPoint PointX="5.510416666666667" PointY="8.4345914713541674" />
+          <ConnectorPoint PointX="5.677083333333333" PointY="8.4345914713541674" />
+          <ConnectorPoint PointX="6" PointY="8.4345914713541674" />
+        </AssociationConnector>
+        <AssociationConnector Association="MovieDBModel.FK_Review_UserAccount" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.2499999999999996" PointY="8.5667936197916674" />
+          <ConnectorPoint PointX="2.625" PointY="8.9417936197916674" />
+          <ConnectorPoint PointX="2.6633335853365385" PointY="8.9417936197916674" />
+          <ConnectorPoint PointX="2.8300002520032055" PointY="8.9417936197916674" />
+          <ConnectorPoint PointX="5.510416666666667" PointY="8.9417936197916674" />
+          <ConnectorPoint PointX="5.677083333333333" PointY="8.9417936197916674" />
+          <ConnectorPoint PointX="5.75" PointY="8.9417936197916674" />
+          <ConnectorPoint PointX="5.75" PointY="14.498847153846153" />
+          <ConnectorPoint PointX="6.0011528461538459" PointY="14.75" />
+        </AssociationConnector>
+        <AssociationConnector Association="MovieDBModel.FK_Trivia_UserAccount" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="6.4037223307291669" />
+          <ConnectorPoint PointX="2.5416666666666665" PointY="6.403722330729166" />
+          <ConnectorPoint PointX="2.7083333333333335" PointY="6.4037223307291669" />
+          <ConnectorPoint PointX="3" PointY="6.4037223307291669" />
+        </AssociationConnector>
+        <AssociationConnector Association="MovieDBModel.FilmGenre" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="14.064603619791665" />
+          <ConnectorPoint PointX="2.6041666666666665" PointY="14.064603619791665" />
+          <ConnectorPoint PointX="2.7708333333333335" PointY="14.064603619791665" />
+          <ConnectorPoint PointX="3" PointY="14.064603619791665" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

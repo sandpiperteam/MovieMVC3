@@ -1,0 +1,7 @@
+c:\_src\MovieMVC3\MovieMVC3\bin\MovieMVC3.dll
+c:\_src\MovieMVC3\MovieMVC3\bin\MovieMVC3.pdb
+c:\_src\MovieMVC3\MovieMVC3\bin\EntityFramework.dll
+c:\_src\MovieMVC3\MovieMVC3\bin\EntityFramework.xml
+c:\_src\MovieMVC3\MovieMVC3\obj\Debug\ResolveAssemblyReference.cache
+c:\_src\MovieMVC3\MovieMVC3\obj\Debug\MovieMVC3.dll
+c:\_src\MovieMVC3\MovieMVC3\obj\Debug\MovieMVC3.pdb
